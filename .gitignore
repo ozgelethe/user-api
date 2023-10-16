@@ -1,0 +1,12 @@
+exp/
+__pycache__/
+*.pyc
+*.pyo
+settings.py
+local_settings.py
+db.sqlite3
+log/
+static/
+media/
+.env
+.vscode/
