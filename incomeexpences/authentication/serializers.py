@@ -15,4 +15,16 @@ class RegisterSerializer(serializers.ModelSerializer):
         fields= ["email", "username", "password"]
         
     def validate(self, attrs):
-        return super().validate(attrs)
+        
+        # this checks for email, gets the email and puts fallback, 
+        # so it doesnt crash
+        email = attrs.get("email", "")
+        
+        username = attrs.get("username", "")
+        
+        if not username.isalnum():
+            raise serializers.ValidationError("username should only contain letters.")
+        return attrs
+
+    def create(self, validated_data):
+        return User.objects.create_user(**validated_data)
